@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self' data:" />
+  <title>DoneDog</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <canvas id="stage"></canvas>
+
+  <div id="hit" role="button" tabindex="0" aria-label="Open DoneDog" aria-expanded="false" aria-controls="bubble" title="Click me! (drag to move me, 3 clicks = zoomies)"></div>
+  <div id="stick-hit" title="The whip. Hit the dog with it. He will take it personally."></div>
+
+  <div id="wouf" class="hidden">Woof!</div>
+
+  <div id="timer" class="hidden" title="Timer running — click to open the list">
+    <span id="timer-text"></span>
+    <button id="timer-cancel" title="Give up (he will note it)">✕</button>
+  </div>
+
+  <div id="bubble" class="hidden" role="dialog" aria-label="DoneDog">
+    <div class="bubble-header">
+      <span id="bubble-title">🐕 DoneDog</span>
+      <span class="header-actions">
+        <button id="btn-settings" aria-expanded="false" aria-controls="settings-view">Settings</button>
+        <button id="btn-close" title="Close" aria-label="Close">✕</button>
+      </span>
+    </div>
+    <div id="dog-level"></div>
+    <div id="storage-notice" class="hidden" role="alert"><p id="storage-message"></p><button id="storage-retry" type="button">Retry saving</button></div>
+    <div id="welcome" class="hidden">
+      <strong id="welcome-title">Your slightly opinionated coworker.</strong>
+      <p id="welcome-copy">Add a task, pick a timer, and check it off when you are done. I’ll keep count.</p>
+      <button id="btn-welcome" class="primary-action">Let’s start</button>
+    </div>
+    <div id="work-view">
+      <div id="tabs" role="tablist" aria-label="Workspace">
+        <button id="tab-tasks" class="tab-btn active" role="tab" aria-selected="true" aria-controls="tasks-view">Tasks</button>
+        <button id="tab-missions" class="tab-btn" role="tab" aria-selected="false" aria-controls="missions-view" tabindex="-1">Missions</button>
+      </div>
+      <p id="view-description" class="view-description"></p>
+      <div id="tasks-view" role="tabpanel" aria-labelledby="tab-tasks">
+        <label class="sr-only" id="task-label" for="task-input">New task</label>
+        <div class="input-row">
+          <input id="task-input" type="text" placeholder="What do you want to finish?" maxlength="200" />
+          <button id="btn-add" title="Add the task">Add</button>
+        </div>
+        <div id="report" class="hidden"></div>
+        <ul id="task-list"></ul>
+        <div class="bubble-footer">
+          <span id="task-count" role="status"></span>
+          <div class="bubble-actions">
+            <button id="btn-speak">Read aloud</button>
+            <button id="btn-report" aria-expanded="false">Daily report</button>
+          </div>
+        </div>
+        <button id="btn-clear-done" class="text-action">Clear completed tasks</button>
+      </div>
+      <div id="missions-view" class="hidden" role="tabpanel" aria-labelledby="tab-missions"></div>
+    </div>
+    <div id="settings-view" class="hidden">
+      <h2 id="settings-title">Make yourself at home</h2>
+      <label class="setting-field"><span id="presence-label">Personality</span><select id="presence-select"><option value="quiet">Quiet</option><option value="companion">Companion</option><option value="chatty">Chatty</option></select></label>
+      <p id="presence-description" class="field-help"></p>
+      <label class="setting-check"><input id="quiet-focus" type="checkbox" /><span id="quiet-focus-label">Stay quiet during timers</span></label>
+      <p id="quiet-focus-description" class="field-help">No roaming or spontaneous remarks. Timer alerts still work.</p>
+      <label class="setting-check"><input id="sound-enabled" type="checkbox" /><span id="sound-label">Voice and sounds</span></label>
+      <label class="setting-field"><span id="volume-label">Volume</span><input id="volume" type="range" min="0" max="100" step="5" /><output id="volume-value" for="volume"></output></label>
+      <label class="setting-field"><span id="skin-label">Character</span><select id="skin-select"><option value="dog">Dog</option><option value="human">Human on all fours</option></select></label>
+      <div class="settings-actions"><button id="btn-rename">Give him a name</button><button id="btn-head">Custom face</button></div>
+      <label class="setting-field"><span id="language-label">Language</span><select id="language-select"><option value="fr">Français</option><option value="en">English</option></select></label>
+      <p id="language-description" class="field-help">Applies immediately. Your tasks and timers stay in place.</p>
+      <details id="help"><summary id="help-title">How it works</summary><ul><li id="help-click"></li><li id="help-drag"></li><li id="help-mission"></li><li id="help-observation"></li><li id="help-behavior"></li><li id="help-whip"></li><li id="help-tray"></li></ul></details>
+      <p id="privacy-note" class="field-help"></p>
+      <p id="app-version"></p>
+      <button id="btn-back" class="primary-action">Back to tasks</button>
+    </div>
+    <div id="presence-status" role="status"></div>
+    <div class="bubble-tail"></div>
+  </div>
+
+  <script src="phrases.js"></script>
+  <script src="brain.js"></script>
+  <script src="activity-core.js"></script>
+  <script src="roast-engine.js"></script>
+  <script src="sprites.js"></script>
+  <script src="missions-core.js"></script>
+  <script src="missions.js"></script>
+  <script src="companion-ui.js"></script>
+  <script src="renderer.js"></script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+{
+  "name": "taskdog",
+  "productName": "DoneDog",
+  "version": "1.3.2",
+  "description": "A dog (or a human on all fours) that watches your PC, keeps your todo list, times you, and judges you.",
+  "main": "src/main.js",
+  "author": "N2bbg (Instagram @N2bbg)",
+  "license": "MIT",
+  "keywords": [
+    "desktop-pet",
+    "electron",
+    "todo",
+    "todolist",
+    "productivity",
+    "windows",
+    "pixel-art",
+    "dog"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Misterbra/Donedog.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Misterbra/Donedog/issues"
+  },
+  "homepage": "https://github.com/Misterbra/Donedog#readme",
+  "scripts": {
+    "start": "electron .",
+    "test": "node --test scripts/test-missions.js scripts/test-render-crack.js scripts/test-window-watcher.js scripts/test-activity.js scripts/test-json-store.js",
+    "test:ui": "electron scripts/smoke-ui.cjs",
+    "test:package": "node scripts/test-packaged-watcher.cjs",
+    "test:release": "node scripts/check-release.cjs",
+    "gen-icons": "node scripts/gen-icons.js",
+    "postinstall": "node scripts/gen-icons.js",
+    "dist": "electron-builder --win --x64 --publish never"
+  },
+  "devDependencies": {
+    "electron": "^44.10.1",
+    "electron-builder": "^26.18.0"
+  },
+  "build": {
+    "appId": "com.ness.taskdog",
+    "productName": "DoneDog",
+    "files": [
+      "src/**/*",
+      "assets/**/*"
+    ],
+    "asarUnpack": [
+      "src/native/window-watcher.ps1"
+    ],
+    "win": {
+      "target": ["nsis", "zip"],
+      "artifactName": "DoneDog-Windows-${arch}.${ext}",
+      "icon": "build/icon.ico"
+    },
+    "nsis": {
+      "oneClick": true,
+      "perMachine": false,
+      "deleteAppDataOnUninstall": false
+    }
+  }
+}

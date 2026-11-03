@@ -1,0 +1,39 @@
+node_modules/
+dist/
+
+# secrets — bring your own key (see gemini-keys.example.json)
+gemini-keys.json
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# User data and generated voice caches must never enter the public repository.
+tasks.json
+missions.json
+settings.json
+tidy-backup.json
+geo.json
+tts-usage.json
+tts-cache/
+backups/
+*.json.bak
+*.json.tmp
+*.json.corrupt-*
+*.bundle
+head.png
+head.jpg
+head.jpeg
+head.webp
+
+# internal dev notes (contain personal info) — sanitize before publishing
+ROADMAP.md
+docs/superpowers/
+docs/audit-2026-09-28.md
+docs/design.md
+
+# OS / editor junk
+.DS_Store
+Thumbs.db
+*.log
